@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    {%- if page.list_title -%}
+      <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {%- endif -%}
+    <div class="post-card-grid">
+      {%- for post in site.posts -%}
+      <a class="post-card" href="{{ post.url | relative_url }}">
+        <div class="post-card-thumb">
+          {%- assign img = post.image | default: nil -%}
+          {%- if img -%}
+            <img src="{{ img | relative_url }}" alt="">
+          {%- else -%}
+            <span class="post-card-thumb-fallback">{{ post.title | slice: 0 }}</span>
+          {%- endif -%}
+        </div>
+        <div class="post-card-body">
+          {%- if post.categories.size > 0 -%}
+            <span class="post-card-category">{{ post.categories | first }}</span>
+          {%- endif -%}
+          <h3 class="post-card-title">{{ post.title }}</h3>
+          <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+          <span class="post-card-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+        </div>
+      </a>
+      {%- endfor -%}
+    </div>
+
+    {%- if site.link_to_feed -%}
+      <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
