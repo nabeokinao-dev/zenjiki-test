@@ -12,6 +12,11 @@
     return (title || "").slice(0, 1);
   }
 
+  function truncateExcerpt(text) {
+    if (!text || text.length <= 180) return text || "";
+    return text.slice(0, 180) + "…<span class=\"post-card-more\">続きを読む</span>";
+  }
+
   function renderPage(page) {
     currentPage = Math.min(Math.max(page, 1), totalPages);
     const start = (currentPage - 1) * PER_PAGE;
@@ -29,7 +34,7 @@
             '<div class="post-card-body">' +
               '<span class="post-card-category">' + post.category + '</span>' +
               '<h3 class="post-card-title">' + post.title + '</h3>' +
-              '<p class="post-card-excerpt">' + post.excerpt + '</p>' +
+              '<p class="post-card-excerpt">' + truncateExcerpt(post.excerpt) + '</p>' +
               '<span class="post-card-date">' + dateLabel + '</span>' +
             '</div>' +
           '</a>' +
