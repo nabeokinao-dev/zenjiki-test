@@ -1,0 +1,9 @@
+title: Zenjiki Test Site
+description: >-
+  Jekyll + GitHub Pages のテスト用サイトです。
+theme: minima
+baseurl: ""
+url: ""
+
+plugins:
+  - jekyll-feed
