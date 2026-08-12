@@ -1,0 +1,145 @@
+---
+---
+
+@import "minima";
+
+:root {
+  --bg: #0f1115;
+  --bg-elevated: #161a21;
+  --text: #e6e8eb;
+  --text-muted: #9aa3af;
+  --accent: #7dd3fc;
+  --border: #262b33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.8;
+}
+
+.site-header {
+  background-color: var(--bg);
+  border-top: none;
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+}
+
+.site-title,
+.site-title:visited {
+  color: var(--text) !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.site-nav .page-link {
+  color: var(--text-muted) !important;
+  font-weight: 400;
+  margin-left: 2rem;
+  transition: color 0.2s ease;
+}
+
+.site-nav .page-link:hover {
+  color: var(--accent) !important;
+}
+
+.site-footer {
+  background-color: var(--bg);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.site-footer a {
+  color: var(--text-muted);
+}
+
+.footer-col-wrapper,
+.site-footer .footer-col a {
+  color: var(--text-muted);
+}
+
+.page-content {
+  padding: 4rem 0;
+}
+
+.wrapper {
+  max-width: 860px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.post-title,
+.post-list h2 a {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.post-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.post-list > li {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-list > li:first-child {
+  padding-top: 0;
+}
+
+.home > p:first-of-type {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+pre, code {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+blockquote {
+  color: var(--text-muted);
+  border-left: 3px solid var(--border);
+}
+
+hr {
+  border-top: 1px solid var(--border);
+}
