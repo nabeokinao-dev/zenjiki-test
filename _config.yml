@@ -2,8 +2,8 @@ title: Zenjiki Test Site
 description: >-
   Jekyll + GitHub Pages のテスト用サイトです。
 theme: minima
-baseurl: ""
-url: ""
+baseurl: "/zenjiki-test"
+url: "https://nabeokinao-dev.github.io"
 
 plugins:
   - jekyll-feed
