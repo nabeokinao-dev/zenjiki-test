@@ -217,6 +217,11 @@ a:hover {
   margin-bottom: 2.5rem;
 }
 
+/* Recent posts (home) */
+.recent-posts {
+  margin-top: 1rem;
+}
+
 /* Post card grid (SWELL-style) */
 .post-list-heading {
   font-size: 1.3rem;
@@ -310,6 +315,45 @@ a:hover {
   font-size: 0.78rem;
   color: var(--text-muted);
   margin-top: auto;
+}
+
+/* Pager */
+.pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+.pager-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pager-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pager-btn.active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.pager-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 /* Single post */
