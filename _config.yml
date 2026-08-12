@@ -7,3 +7,7 @@ url: "https://nabeokinao-dev.github.io"
 
 plugins:
   - jekyll-feed
+
+header_pages:
+  - posts.html
+  - about.md

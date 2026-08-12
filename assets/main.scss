@@ -97,6 +97,64 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.5rem;
 }
 
+/* Hero (home) */
+.hero {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 2.5rem;
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+.hero-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2rem 2rem 1.75rem;
+  background: linear-gradient(to top, rgba(20, 20, 24, 0.75), rgba(20, 20, 24, 0));
+  color: #fff;
+}
+
+.hero-caption p {
+  margin: 0 0 0.5rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+}
+
+.hero-cta {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background-color: #fff;
+  color: var(--text) !important;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none !important;
+  transition: transform 0.15s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
