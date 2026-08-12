@@ -17,6 +17,8 @@
 
 html {
   background-color: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -426,4 +428,69 @@ blockquote {
 
 hr {
   border-top: 1px solid var(--border);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .wrapper {
+    padding: 0 1.1rem;
+  }
+
+  .site-header {
+    padding: 1rem 0;
+  }
+
+  .site-title {
+    font-size: 1.05rem;
+  }
+
+  .site-nav {
+    gap: 1.25rem;
+  }
+
+  .site-nav a {
+    font-size: 0.88rem;
+  }
+
+  .page-content {
+    padding: 2rem 0;
+  }
+
+  .page-heading {
+    font-size: 1.5rem;
+  }
+
+  .hero-caption {
+    padding: 1.25rem 1.25rem 1.1rem;
+  }
+
+  .hero-badge {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .hero-caption p:not(.hero-badge) {
+    font-size: 0.85rem;
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+  }
+
+  .post-content {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.15rem;
+    margin-top: 2rem;
+  }
+
+  .post-card-title {
+    font-size: 1rem;
+  }
+
+  .post-card-body {
+    padding: 1rem 1.1rem 1.25rem;
+  }
 }
