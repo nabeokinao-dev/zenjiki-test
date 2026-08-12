@@ -303,7 +303,10 @@ a:hover {
 }
 
 .post-content img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
