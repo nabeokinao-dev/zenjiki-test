@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Language" content="ja">
+<title>経絡チェック4択クイズ | 渡邉和明（テスト用）</title>
+<link rel="stylesheet" href="../assets/main.css">
+<style>
+  .quiz-box {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+  }
+  .quiz-progress {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .quiz-question {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 1.75rem;
+  }
+  .quiz-question .muscle-name {
+    color: var(--accent);
+  }
+  .quiz-choices {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+  }
+  .quiz-choice-btn {
+    width: 100%;
+    text-align: left;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    color: var(--text);
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .quiz-choice-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+  .quiz-choice-btn.correct {
+    border-color: #4caf82;
+    background-color: #1c3329;
+    color: #8fe3bb;
+  }
+  .quiz-choice-btn.wrong {
+    border-color: #e2564f;
+    background-color: #3a1f1e;
+    color: #ffb3ae;
+  }
+  .quiz-choice-btn:disabled {
+    cursor: default;
+  }
+  .quiz-feedback {
+    min-height: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .quiz-next-btn {
+    display: inline-block;
+    background-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .quiz-result {
+    text-align: center;
+  }
+  .quiz-result .score {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1rem 0;
+  }
+  .quiz-restart-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" href="../index.html">渡邉和明（テスト用）</a>
+    <nav class="site-nav">
+      <a href="../posts.html">投稿</a>
+      <a href="../apps.html" class="active">アプリ</a>
+      <a href="../about.html">概要</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page-content">
+  <div class="wrapper">
+    <h1 class="page-heading">経絡チェック4択クイズ</h1>
+    <p style="color: var(--text-muted); margin-top: -1rem; margin-bottom: 2rem;">筋反射チェックで使う筋肉名から、対応する経絡の名称を当てましょう。全10問、10点満点。</p>
+
+    <div class="quiz-box" id="quiz-box"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>&copy; 渡邉和明（テスト用）</p>
+  </div>
+</footer>
+
+<script>
+// 14経絡チェック表（筋肉／経絡の流れ）を基にしたデータ
+const MERIDIANS = [
+  { name: "任脈", muscle: "棘上筋" },
+  { name: "督脈", muscle: "大円筋" },
+  { name: "肝経", muscle: "大胸筋肋骨部" },
+  { name: "胆経", muscle: "三角筋（前部）" },
+  { name: "心経", muscle: "肩甲下筋" },
+  { name: "小腸経", muscle: "大腿四頭筋" },
+  { name: "心包経", muscle: "中臀筋" },
+  { name: "三焦経", muscle: "小円筋" },
+  { name: "脾経", muscle: "広背筋" },
+  { name: "胃経", muscle: "大胸筋鎖骨部" },
+  { name: "肺経", muscle: "前鋸筋" },
+  { name: "大腸経", muscle: "大腿筋膜張筋" },
+  { name: "腎経", muscle: "大腰筋" },
+  { name: "膀胱経", muscle: "腓骨筋" }
+];
+
+const TOTAL_QUESTIONS = 10;
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildQuestions() {
+  const picked = shuffle(MERIDIANS).slice(0, TOTAL_QUESTIONS);
+  return picked.map(function (correct) {
+    const distractors = shuffle(MERIDIANS.filter(function (m) { return m.name !== correct.name; })).slice(0, 3);
+    const choices = shuffle([correct].concat(distractors)).map(function (m) { return m.name; });
+    return { muscle: correct.muscle, answer: correct.name, choices: choices };
+  });
+}
+
+let questions = [];
+let currentIndex = 0;
+let score = 0;
+
+const box = document.getElementById("quiz-box");
+
+function renderQuestion() {
+  const q = questions[currentIndex];
+  box.innerHTML =
+    '<p class="quiz-progress">第 ' + (currentIndex + 1) + ' 問 / 全 ' + TOTAL_QUESTIONS + ' 問</p>' +
+    '<p class="quiz-question">この筋肉のチェック方法は、どの経絡？<br><span class="muscle-name">' + q.muscle + '</span></p>' +
+    '<ul class="quiz-choices">' +
+      q.choices.map(function (choice) {
+        return '<li><button type="button" class="quiz-choice-btn" data-choice="' + choice + '">' + choice + '</button></li>';
+      }).join("") +
+    '</ul>' +
+    '<p class="quiz-feedback" id="quiz-feedback"></p>';
+
+  box.querySelectorAll(".quiz-choice-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () { handleAnswer(btn, q); });
+  });
+}
+
+function handleAnswer(btn, q) {
+  const choice = btn.dataset.choice;
+  const correct = choice === q.answer;
+  if (correct) score++;
+
+  box.querySelectorAll(".quiz-choice-btn").forEach(function (b) {
+    b.disabled = true;
+    if (b.dataset.choice === q.answer) b.classList.add("correct");
+    else if (b === btn) b.classList.add("wrong");
+  });
+
+  document.getElementById("quiz-feedback").textContent = correct
+    ? "正解です！"
+    : "不正解。正解は「" + q.answer + "」です。";
+
+  const nextBtn = document.createElement("button");
+  nextBtn.type = "button";
+  nextBtn.className = "quiz-next-btn";
+  nextBtn.textContent = currentIndex === TOTAL_QUESTIONS - 1 ? "結果を見る" : "次の問題へ";
+  nextBtn.addEventListener("click", function () {
+    currentIndex++;
+    if (currentIndex >= TOTAL_QUESTIONS) renderResult();
+    else renderQuestion();
+  });
+  box.appendChild(nextBtn);
+}
+
+function renderResult() {
+  box.innerHTML =
+    '<div class="quiz-result">' +
+      '<p>結果発表</p>' +
+      '<p class="score">' + score + ' / ' + TOTAL_QUESTIONS + '</p>' +
+      '<button type="button" class="quiz-restart-btn" id="restart-btn">もう一度挑戦する</button>' +
+    '</div>';
+  document.getElementById("restart-btn").addEventListener("click", startQuiz);
+}
+
+function startQuiz() {
+  questions = buildQuestions();
+  currentIndex = 0;
+  score = 0;
+  renderQuestion();
+}
+
+startQuiz();
+</script>
+</body>
+</html>

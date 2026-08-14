@@ -1,13 +1,13 @@
 :root {
-  --bg: #f7f8fa;
-  --surface: #ffffff;
-  --text: #2b2f36;
-  --text-muted: #6b7280;
-  --accent: #ff7a59;
-  --accent-soft: #fff1ec;
-  --border: #eceef1;
-  --shadow: 0 4px 20px rgba(30, 34, 40, 0.06);
-  --shadow-hover: 0 10px 30px rgba(30, 34, 40, 0.12);
+  --bg: #14161a;
+  --surface: #1d2025;
+  --text: #eceef1;
+  --text-muted: #9aa1ab;
+  --accent: #ff8a68;
+  --accent-soft: #3a2620;
+  --border: #2b2f36;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.5);
   --radius: 16px;
 }
 
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-cta {
   display: inline-block;
   margin-top: 0.75rem;
-  background-color: #fff;
+  background-color: var(--surface);
   color: var(--text) !important;
   font-weight: 700;
   font-size: 0.9rem;
@@ -214,7 +214,7 @@ a:hover {
   background-color: var(--accent-soft);
   border-radius: var(--radius);
   padding: 1.1rem 1.4rem;
-  color: #b8552f;
+  color: var(--accent);
   font-size: 0.95rem;
   margin-bottom: 2.5rem;
 }
@@ -258,7 +258,7 @@ a:hover {
 
 .post-card-thumb {
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, var(--accent-soft), #ffe0d3);
+  background: linear-gradient(135deg, var(--accent-soft), #2a1912);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -412,7 +412,7 @@ a:hover {
 }
 
 pre, code {
-  background-color: #f4f5f7;
+  background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text);
